@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+/* ============================================
+   SmartDensity Design System — CSS Variables
+   Based on Axiom Legal App UI Design System
+   ============================================ */
+
+@layer base {
+  :root {
+    /* Colors — Core */
+    --color-black: #0D0D1A;
+    --color-white: #FFFFFF;
+    --color-bg-app: #F4F4F6;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #F9F9F9;
+
+    /* Colors — Text */
+    --color-text-primary: #111111;
+    --color-text-secondary: #555555;
+    --color-text-muted: #999999;
+    --color-text-inverted: #FFFFFF;
+
+    /* Colors — Accent */
+    --color-accent: #5BC8C5;
+    --color-accent-light: #D6F4F2;
+    --color-accent-dark: #3AABA8;
+
+    /* Colors — Feature */
+    --color-feature-bg: #7ED6D6;
+
+    /* Colors — Button */
+    --color-btn-primary: #111111;
+    --color-btn-primary-text: #FFFFFF;
+
+    /* Colors — States */
+    --color-selected: #111111;
+    --color-border: #EBEBEB;
+    --color-tag-bg: #F0F0F0;
+    --color-tag-text: #333333;
+
+    /* Splash / Dark Screen */
+    --splash-bg-start: #0A0A18;
+    --splash-bg-mid: #0D1B2A;
+    --splash-glow-teal: rgba(60, 220, 200, 0.25);
+    --splash-glow-purple: rgba(120, 80, 200, 0.15);
+
+    /* Typography */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --text-display: 38px;
+    --text-xl: 28px;
+    --text-lg: 22px;
+    --text-md: 18px;
+    --text-base: 15px;
+    --text-sm: 13px;
+    --text-xs: 11px;
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-base: 16px;
+    --space-lg: 20px;
+    --space-xl: 24px;
+    --space-2xl: 32px;
+    --space-3xl: 48px;
+
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.06);
+    --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.10);
+    --shadow-nav: 0 -2px 20px rgba(0, 0, 0, 0.07);
+    --shadow-btn: 0 4px 16px rgba(0, 0, 0, 0.20);
+    --shadow-icon-btn: 0 2px 8px rgba(0, 0, 0, 0.12);
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: var(--font-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--color-bg-app);
+    color: var(--color-text-primary);
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+}
+
+/* ============================================
+   App Shell & Responsive
+   ============================================ */
+
+.app-shell {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  position: relative;
+  background: var(--color-bg-app);
+}
+
+.app-container {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.screen {
+  height: 100dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* Hide scrollbars but allow scroll */
+.scroll-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Desktop — center the phone layout */
+@media (min-width: 768px) {
+  body {
+    background: #E8E8EA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .app-shell {
+    max-width: 390px;
+    min-height: 844px;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ============================================
+   Touch Targets
+   ============================================ */
+
+button,
+a,
+[role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* ============================================
+   Micro-interactions
+   ============================================ */
+
+.btn:active {
+  transform: scale(0.96);
+  transition: transform 100ms ease;
+}
+
+.card:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-card);
+  transition: transform 150ms ease;
+}
+
+/* Page transition — slide in from right */
+.screen-enter {
+  animation: slideInRight 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   Splash / Dark Screen Gradient
+   ============================================ */
+
+.splash-bg {
+  background: linear-gradient(180deg, var(--splash-bg-start) 0%, var(--splash-bg-mid) 100%);
+  position: relative;
+}
+
+.splash-bg::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: var(--splash-glow-teal);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}

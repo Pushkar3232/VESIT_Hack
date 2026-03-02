@@ -1,0 +1,64 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String         @id @default(cuid())
+  email     String         @unique
+  name      String?
+  createdAt DateTime       @default(now())
+  searches  TravelSearch[]
+}
+
+model Place {
+  id        String        @id @default(cuid())
+  name      String
+  type      PlaceType
+  city      String
+  latitude  Float
+  longitude Float
+  crowdData CrowdRecord[]
+}
+
+model CrowdRecord {
+  id         String     @id @default(cuid())
+  placeId    String
+  place      Place      @relation(fields: [placeId], references: [id])
+  timestamp  DateTime
+  crowdScore Int
+  level      CrowdLevel
+  source     String
+}
+
+model TravelSearch {
+  id          String   @id @default(cuid())
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  source      String
+  destination String
+  arrivalTime String
+  result      Json
+  createdAt   DateTime @default(now())
+}
+
+enum PlaceType {
+  STATION
+  PUBLIC_PLACE
+  BUS_STOP
+  AIRPORT
+  METRO
+}
+
+enum CrowdLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
