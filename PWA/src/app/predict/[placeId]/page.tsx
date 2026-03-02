@@ -35,25 +35,27 @@ export default function PlacePredictionPage() {
   }, [placeId]);
 
   return (
-    <div className="px-5 pb-6">
+    <div className="page-container pb-8 animate-enter">
       <Navbar variant="detail" title={place?.name ?? "Station"} />
 
-      <div className="mt-4 space-y-5">
+      <div className="mt-4 space-y-6">
         {isLoading && (
-          <div className="py-12">
-            <Loader size={32} />
-            <p className="text-center text-[13px] text-[var(--color-text-muted)] mt-3">
+          <div className="py-16 text-center">
+            <Loader size={36} />
+            <p className="text-[13px] text-[var(--text-muted)] mt-4">
               Loading predictions for {place?.name}...
             </p>
           </div>
         )}
 
         {result && !isLoading && (
-          <div className="space-y-5 screen-enter">
-            <PredictionResultCard result={result} />
-            {result.hourlyForecast && <CrowdChart data={result.hourlyForecast} />}
+          <>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 screen-enter">
+              <PredictionResultCard result={result} />
+              {result.hourlyForecast && <CrowdChart data={result.hourlyForecast} />}
+            </div>
             <FactorsPanel factors={result.factors} />
-          </div>
+          </>
         )}
       </div>
     </div>

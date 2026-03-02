@@ -1,87 +1,106 @@
 @import "tailwindcss";
 
 /* ============================================
-   SmartDensity Design System — CSS Variables
-   Based on Axiom Legal App UI Design System
+   SmartDensity Design System
+   Professional Web + Mobile PWA
+   Fonts loaded via next/font/google in layout.tsx
    ============================================ */
+
+@theme inline {
+  --color-background: #F4F4F6;
+  --color-foreground: #111111;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'Courier New', monospace;
+}
 
 @layer base {
   :root {
-    /* Colors — Core */
-    --color-black: #0D0D1A;
-    --color-white: #FFFFFF;
-    --color-bg-app: #F4F4F6;
-    --color-surface: #FFFFFF;
-    --color-surface-alt: #F9F9F9;
+    /* ── Backgrounds ──────────────────────── */
+    --bg-dark:          #0D0D1A;
+    --bg-dark-mid:      #131325;
+    --bg-light:         #F4F4F6;
+    --bg-surface:       #FFFFFF;
+    --bg-surface-soft:  #F9F9FB;
 
-    /* Colors — Text */
-    --color-text-primary: #111111;
-    --color-text-secondary: #555555;
-    --color-text-muted: #999999;
-    --color-text-inverted: #FFFFFF;
+    /* ── Text ─────────────────────────────── */
+    --text-primary:     #111111;
+    --text-secondary:   #555555;
+    --text-muted:       #999999;
+    --text-on-dark:     #FFFFFF;
+    --text-on-dark-dim: rgba(255, 255, 255, 0.60);
 
-    /* Colors — Accent */
-    --color-accent: #5BC8C5;
-    --color-accent-light: #D6F4F2;
-    --color-accent-dark: #3AABA8;
+    /* ── Accent ───────────────────────────── */
+    --accent:           #5BC8C5;
+    --accent-hover:     #3AABA8;
+    --accent-light:     #D6F4F2;
+    --accent-glow:      rgba(91, 200, 197, 0.25);
 
-    /* Colors — Feature */
-    --color-feature-bg: #7ED6D6;
+    /* ── Feature ──────────────────────────── */
+    --feature-bg:       #7ED6D6;
+    --feature-text:     #0D3333;
 
-    /* Colors — Button */
-    --color-btn-primary: #111111;
-    --color-btn-primary-text: #FFFFFF;
+    /* ── Buttons ──────────────────────────── */
+    --btn-primary-bg:   #111111;
+    --btn-primary-text: #FFFFFF;
+    --btn-ghost-border: #DDDDDD;
+    --btn-ghost-text:   #111111;
 
-    /* Colors — States */
-    --color-selected: #111111;
-    --color-border: #EBEBEB;
-    --color-tag-bg: #F0F0F0;
-    --color-tag-text: #333333;
+    /* ── UI Scaffolding ───────────────────── */
+    --border:           #EBEBEB;
+    --border-dark:      rgba(255, 255, 255, 0.10);
+    --chip-bg:          #F0F0F0;
+    --chip-text:        #333333;
+    --selected-bg:      #111111;
+    --selected-text:    #FFFFFF;
 
-    /* Splash / Dark Screen */
-    --splash-bg-start: #0A0A18;
-    --splash-bg-mid: #0D1B2A;
-    --splash-glow-teal: rgba(60, 220, 200, 0.25);
-    --splash-glow-purple: rgba(120, 80, 200, 0.15);
+    /* ── Status Colors ────────────────────── */
+    --success:          #22C55E;
+    --warning:          #F59E0B;
+    --error:            #EF4444;
+    --info:             #3B82F6;
 
-    /* Typography */
-    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --text-display: 38px;
-    --text-xl: 28px;
-    --text-lg: 22px;
-    --text-md: 18px;
-    --text-base: 15px;
-    --text-sm: 13px;
-    --text-xs: 11px;
+    /* ── Typography ───────────────────────── */
+    --font-display:     'Sora', sans-serif;
+    --font-body:        'DM Sans', sans-serif;
 
-    /* Spacing */
-    --space-xs: 4px;
-    --space-sm: 8px;
-    --space-md: 12px;
-    --space-base: 16px;
-    --space-lg: 20px;
-    --space-xl: 24px;
-    --space-2xl: 32px;
-    --space-3xl: 48px;
+    /* ── Spacing ──────────────────────────── */
+    --space-1:  4px;
+    --space-2:  8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-5:  20px;
+    --space-6:  24px;
+    --space-8:  32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
 
-    /* Border Radius */
-    --radius-sm: 8px;
-    --radius-md: 16px;
-    --radius-lg: 20px;
-    --radius-xl: 28px;
-    --radius-full: 9999px;
+    /* ── Border Radius ────────────────────── */
+    --radius-xs:    6px;
+    --radius-sm:    10px;
+    --radius-md:    16px;
+    --radius-lg:    20px;
+    --radius-xl:    28px;
+    --radius-2xl:   40px;
+    --radius-full:  9999px;
 
-    /* Shadows */
-    --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.06);
-    --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.10);
-    --shadow-nav: 0 -2px 20px rgba(0, 0, 0, 0.07);
-    --shadow-btn: 0 4px 16px rgba(0, 0, 0, 0.20);
-    --shadow-icon-btn: 0 2px 8px rgba(0, 0, 0, 0.12);
+    /* ── Shadows ──────────────────────────── */
+    --shadow-xs:   0 1px 4px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.04);
+    --shadow-sm:   0 2px 8px rgba(0,0,0,0.05), 0 4px 20px rgba(0,0,0,0.06);
+    --shadow-md:   0 8px 24px rgba(0,0,0,0.08), 0 16px 40px rgba(0,0,0,0.08);
+    --shadow-lg:   0 20px 60px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.08);
+    --shadow-btn:  0 4px 16px rgba(0,0,0,0.20), 0 2px 6px rgba(0,0,0,0.12);
+    --shadow-nav:  0 -2px 20px rgba(0,0,0,0.06), 0 -1px 4px rgba(0,0,0,0.04);
+    --shadow-glow: 0 0 40px rgba(91,200,197,0.30);
 
-    /* Transitions */
-    --transition-fast: 150ms ease;
-    --transition-base: 250ms ease;
-    --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* ── Transitions ──────────────────────── */
+    --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce:  cubic-bezier(0.34, 1.56, 0.64, 1);
+    --duration-fast: 150ms;
+    --duration-base: 250ms;
+    --duration-slow: 400ms;
   }
 }
 
@@ -97,70 +116,79 @@
   }
 
   html {
-    font-family: var(--font-primary);
+    font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
 
   body {
-    background: var(--color-bg-app);
-    color: var(--color-text-primary);
-    overflow: hidden;
+    background: var(--bg-light);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.65;
     overscroll-behavior: none;
+    min-height: 100dvh;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+    color: var(--text-primary);
+  }
+
+  a { text-decoration: none; color: inherit; }
 }
 
 /* ============================================
-   App Shell & Responsive
+   Layout Shell — Responsive Web + Mobile
    ============================================ */
 
-.app-shell {
-  width: 100%;
-  max-width: 430px;
-  margin: 0 auto;
+.app-layout {
+  display: flex;
   min-height: 100dvh;
-  position: relative;
-  background: var(--color-bg-app);
 }
 
-.app-container {
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
-}
-
-.screen {
-  height: 100dvh;
+.app-main {
+  flex: 1;
+  min-height: 100dvh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
+  position: relative;
 }
 
-/* Hide scrollbars but allow scroll */
-.scroll-container {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.scroll-container::-webkit-scrollbar {
-  display: none;
-}
-
-/* Desktop — center the phone layout */
-@media (min-width: 768px) {
-  body {
-    background: #E8E8EA;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+@media (min-width: 1024px) {
+  .app-main {
+    margin-left: 260px;
   }
-  .app-shell {
-    max-width: 390px;
-    min-height: 844px;
-    border-radius: 40px;
-    overflow: hidden;
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1023px) {
+  .app-main {
+    padding-bottom: 80px;
+  }
+}
+
+/* Container */
+.page-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .page-container {
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .page-container {
+    padding: 0 80px;
   }
 }
 
@@ -176,41 +204,95 @@ a,
 }
 
 /* ============================================
-   Micro-interactions
+   Scrollbar Styles
    ============================================ */
 
-.btn:active {
-  transform: scale(0.96);
-  transition: transform 100ms ease;
+.scroll-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
 }
 
-.card:active {
-  transform: scale(0.98);
-  box-shadow: var(--shadow-card);
-  transition: transform 150ms ease;
-}
-
-/* Page transition — slide in from right */
-.screen-enter {
-  animation: slideInRight 300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
+@media (min-width: 768px) {
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 9999px;
   }
-  to {
-    transform: translateX(0);
-    opacity: 1;
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
   }
 }
 
 /* ============================================
-   Splash / Dark Screen Gradient
+   Animations & Motion
+   ============================================ */
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-enter {
+  animation: fadeSlideUp 350ms var(--ease-out) forwards;
+}
+
+.stagger-1 { animation-delay: 0ms; }
+.stagger-2 { animation-delay: 60ms; }
+.stagger-3 { animation-delay: 120ms; }
+.stagger-4 { animation-delay: 180ms; }
+.stagger-5 { animation-delay: 240ms; }
+
+.card-hover {
+  transition: transform 250ms var(--ease-out), box-shadow 250ms var(--ease-out);
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(30px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+.screen-enter {
+  animation: slideInRight 300ms var(--ease-out);
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.08); }
+}
+.glow-pulse {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--chip-bg) 25%,
+    var(--border) 50%,
+    var(--chip-bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ============================================
+   Splash / Dark Screen
    ============================================ */
 
 .splash-bg {
-  background: linear-gradient(180deg, var(--splash-bg-start) 0%, var(--splash-bg-mid) 100%);
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 80%, rgba(60,200,197,0.12), transparent),
+    radial-gradient(ellipse 60% 50% at 90% 20%, rgba(100,80,200,0.08), transparent),
+    var(--bg-dark);
   position: relative;
 }
 
@@ -223,33 +305,56 @@ a,
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: var(--splash-glow-teal);
+  background: var(--accent-glow);
   filter: blur(80px);
   pointer-events: none;
 }
 
+/* ============================================
+   Grid & Layout Utilities 
+   ============================================ */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.grid-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (min-width: 768px) {
+  .grid-cards {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (min-width: 1024px) {
+  .grid-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stats-grid > :last-child {
+    grid-column: span 2;
+  }
+}
+
+/* Section header row */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Safe areas */
+.safe-top { padding-top: env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }

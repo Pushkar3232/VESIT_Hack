@@ -1,7 +1,7 @@
 "use client";
 
 import Card from "@/components/ui/Card";
-import { Cloud, Sun, CloudRain, Thermometer } from "lucide-react";
+import { Cloud, Sun, CloudRain, Thermometer, Droplets } from "lucide-react";
 
 interface WeatherWidgetProps {
   condition: string;
@@ -15,30 +15,33 @@ function getWeatherIcon(condition: string) {
     case "rain":
     case "drizzle":
     case "thunderstorm":
-      return <CloudRain size={24} className="text-blue-400" />;
+      return <CloudRain size={28} className="text-blue-400" />;
     case "clouds":
-      return <Cloud size={24} className="text-gray-400" />;
+      return <Cloud size={28} className="text-gray-400" />;
     default:
-      return <Sun size={24} className="text-yellow-400" />;
+      return <Sun size={28} className="text-yellow-400" />;
   }
 }
 
 export default function WeatherWidget({ condition, temp, humidity, city = "Mumbai" }: WeatherWidgetProps) {
   return (
     <Card className="flex items-center gap-4">
-      <div className="w-12 h-12 rounded-[var(--radius-md)] bg-blue-50 flex items-center justify-center">
+      <div className="w-14 h-14 rounded-[var(--radius-md)] bg-blue-50 flex items-center justify-center flex-shrink-0">
         {getWeatherIcon(condition)}
       </div>
       <div className="flex-1">
-        <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">
+        <p
+          style={{ fontFamily: "var(--font-display)" }}
+          className="text-[15px] font-semibold text-[var(--text-primary)]"
+        >
           {condition} in {city}
         </p>
-        <div className="flex items-center gap-3 mt-1">
-          <span className="flex items-center gap-1 text-[12px] text-[var(--color-text-muted)]">
-            <Thermometer size={12} /> {Math.round(temp)}°C
+        <div className="flex items-center gap-4 mt-1.5">
+          <span className="flex items-center gap-1.5 text-[13px] text-[var(--text-muted)]">
+            <Thermometer size={14} /> {Math.round(temp)}°C
           </span>
-          <span className="text-[12px] text-[var(--color-text-muted)]">
-            💧 {humidity}%
+          <span className="flex items-center gap-1.5 text-[13px] text-[var(--text-muted)]">
+            <Droplets size={14} /> {humidity}%
           </span>
         </div>
       </div>

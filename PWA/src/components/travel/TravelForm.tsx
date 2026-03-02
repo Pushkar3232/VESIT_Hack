@@ -4,6 +4,7 @@ import { useState } from "react";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
 import Button from "@/components/ui/Button";
+import Card from "@/components/ui/Card";
 import { DEFAULT_PLACES } from "@/lib/utils/constants";
 
 interface TravelFormProps {
@@ -29,31 +30,39 @@ export default function TravelForm({ onSubmit, isLoading }: TravelFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <Select
-        label="Source Station"
-        options={placeOptions}
-        value={source}
-        onChange={(e) => setSource(e.target.value)}
-        required
-      />
-      <Select
-        label="Destination Station"
-        options={placeOptions}
-        value={destination}
-        onChange={(e) => setDestination(e.target.value)}
-        required
-      />
-      <Input
-        label="Desired Arrival Time"
-        type="time"
-        value={arrivalTime}
-        onChange={(e) => setArrivalTime(e.target.value)}
-        required
-      />
-      <Button type="submit" fullWidth disabled={isLoading || !source || !destination || !arrivalTime}>
-        {isLoading ? "Planning..." : "Plan My Travel"}
-      </Button>
-    </form>
+    <Card hover={false}>
+      <h3
+        style={{ fontFamily: "var(--font-display)" }}
+        className="text-[16px] font-bold text-[var(--text-primary)] mb-5"
+      >
+        Route Details
+      </h3>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <Select
+          label="Source Station"
+          options={placeOptions}
+          value={source}
+          onChange={(e) => setSource(e.target.value)}
+          required
+        />
+        <Select
+          label="Destination Station"
+          options={placeOptions}
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
+          required
+        />
+        <Input
+          label="Desired Arrival Time"
+          type="time"
+          value={arrivalTime}
+          onChange={(e) => setArrivalTime(e.target.value)}
+          required
+        />
+        <Button type="submit" fullWidth disabled={isLoading || !source || !destination || !arrivalTime}>
+          {isLoading ? "Planning..." : "Plan My Travel"}
+        </Button>
+      </form>
+    </Card>
   );
 }

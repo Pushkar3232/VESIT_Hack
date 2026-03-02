@@ -15,55 +15,74 @@ export default function TravelResult({ result }: TravelResultProps) {
 
   return (
     <div className="space-y-4">
-      {/* Best Recommendation */}
-      <Card className="border-2 border-green-200 !bg-green-50">
+      <Card hover={false} className="!border-2 !border-green-200 !bg-green-50">
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-[18px]">🟢</span>
-          <h3 className="text-[16px] font-bold text-green-800">Best Time to Leave</h3>
+          <div className="w-8 h-8 rounded-full bg-[var(--success)] flex items-center justify-center">
+            <span className="text-white text-[12px] font-bold">✓</span>
+          </div>
+          <h3
+            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[16px] font-bold text-green-800"
+          >
+            Best Time to Leave
+          </h3>
         </div>
-        <p className="text-[28px] font-extrabold text-green-700">
+        <p
+          style={{ fontFamily: "var(--font-display)" }}
+          className="text-[32px] font-extrabold text-green-700"
+        >
           {formatTime(recommendation.departureTime)}
         </p>
-        <div className="flex gap-4 mt-3">
+        <div className="flex gap-4 mt-4">
           <div>
-            <p className="text-[11px] text-[var(--color-text-muted)] uppercase tracking-wider">Source</p>
-            <Badge level={getCrowdLevel(recommendation.crowdScoreSource)}>
+            <p className="text-[11px] text-[var(--text-muted)] uppercase tracking-[1.5px] font-medium">
+              Source
+            </p>
+            <Badge level={getCrowdLevel(recommendation.crowdScoreSource)} className="mt-1">
               {getCrowdEmoji(getCrowdLevel(recommendation.crowdScoreSource))} {recommendation.crowdScoreSource}/100
             </Badge>
           </div>
           <div>
-            <p className="text-[11px] text-[var(--color-text-muted)] uppercase tracking-wider">Destination</p>
-            <Badge level={getCrowdLevel(recommendation.crowdScoreDest)}>
+            <p className="text-[11px] text-[var(--text-muted)] uppercase tracking-[1.5px] font-medium">
+              Destination
+            </p>
+            <Badge level={getCrowdLevel(recommendation.crowdScoreDest)} className="mt-1">
               {getCrowdEmoji(getCrowdLevel(recommendation.crowdScoreDest))} {recommendation.crowdScoreDest}/100
             </Badge>
           </div>
         </div>
-        <p className="text-[12px] text-green-700 mt-3">
-          Est. Arrival: {formatTime(recommendation.arrivalTime)} ✅
+        <p className="text-[12px] text-green-700 mt-3 font-medium">
+          Est. Arrival: {formatTime(recommendation.arrivalTime)} ✓
         </p>
       </Card>
 
-      {/* All Windows */}
-      <h3 className="text-[15px] font-semibold text-[var(--color-text-primary)]">
-        Other Options
-      </h3>
-      <div className="space-y-2">
-        {allWindows.slice(1).map((window, i) => (
-          <Card key={i} className="flex items-center justify-between !p-3">
-            <div>
-              <p className="text-[14px] font-semibold text-[var(--color-text-primary)]">
-                Leave at {formatTime(window.departureTime)}
-              </p>
-              <p className="text-[11px] text-[var(--color-text-muted)]">
-                Arrive ~{formatTime(window.arrivalTime)}
-              </p>
-            </div>
-            <Badge level={getCrowdLevel(window.overallScore)}>
-              {window.overallScore}/100
-            </Badge>
-          </Card>
-        ))}
-      </div>
+      {allWindows.length > 1 && (
+        <>
+          <h3
+            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[15px] font-semibold text-[var(--text-primary)]"
+          >
+            Other Options
+          </h3>
+          <div className="space-y-2.5">
+            {allWindows.slice(1).map((window, i) => (
+              <Card key={i} hover={false} className="flex items-center justify-between !p-4">
+                <div>
+                  <p className="text-[14px] font-semibold text-[var(--text-primary)]">
+                    Leave at {formatTime(window.departureTime)}
+                  </p>
+                  <p className="text-[11px] text-[var(--text-muted)]">
+                    Arrive ~{formatTime(window.arrivalTime)}
+                  </p>
+                </div>
+                <Badge level={getCrowdLevel(window.overallScore)}>
+                  {window.overallScore}/100
+                </Badge>
+              </Card>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

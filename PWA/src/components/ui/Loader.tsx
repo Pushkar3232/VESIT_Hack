@@ -4,7 +4,7 @@ export default function Loader({ size = 24, className = "" }: { size?: number; c
   return (
     <div className={`flex items-center justify-center ${className}`}>
       <div
-        className="animate-spin rounded-full border-2 border-[var(--color-border)] border-t-[var(--color-accent)]"
+        className="animate-spin rounded-full border-2 border-[var(--border)] border-t-[var(--accent)]"
         style={{ width: size, height: size }}
       />
     </div>

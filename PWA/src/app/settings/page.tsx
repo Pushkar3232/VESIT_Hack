@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
 import { useNotifications } from "@/hooks/useNotifications";
 import { Bell, Moon, Globe, Shield, ChevronRight } from "lucide-react";
 
@@ -54,45 +53,47 @@ export default function SettingsPage() {
   ];
 
   return (
-    <div className="px-5 pb-6">
+    <div className="page-container pb-8 animate-enter">
       <Navbar variant="detail" title="Settings" />
 
-      <div className="mt-4 space-y-6">
+      <div className="mt-2 space-y-6 max-w-[600px]">
         {settingsGroups.map((group) => (
           <div key={group.title}>
-            <h3 className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2 px-1">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[2px] text-[var(--text-muted)] mb-3 px-1">
               {group.title}
             </h3>
-            <Card className="!p-0 divide-y divide-[var(--color-border)]">
+            <Card hover={false} className="!p-0 divide-y divide-[var(--border)] overflow-hidden">
               {group.items.map((item) => (
                 <button
                   key={item.label}
                   onClick={item.action}
-                  className="w-full flex items-center gap-3 px-4 py-3.5 text-left hover:bg-[var(--color-surface-alt)] transition-colors"
+                  className="w-full flex items-center gap-4 px-5 py-4 text-left hover:bg-[var(--bg-surface-soft)] transition-colors cursor-pointer"
                 >
-                  <div className="text-[var(--color-text-muted)]">{item.icon}</div>
+                  <div className="w-10 h-10 rounded-[var(--radius-sm)] bg-[var(--bg-surface-soft)] flex items-center justify-center text-[var(--text-muted)]">
+                    {item.icon}
+                  </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[14px] font-medium text-[var(--color-text-primary)]">
+                    <p className="text-[14px] font-medium text-[var(--text-primary)]">
                       {item.label}
                     </p>
-                    <p className="text-[12px] text-[var(--color-text-muted)]">
+                    <p className="text-[12px] text-[var(--text-muted)]">
                       {item.description}
                     </p>
                   </div>
                   {item.toggle !== undefined ? (
                     <div
-                      className={`w-10 h-6 rounded-full transition-colors ${
-                        item.toggle ? "bg-[var(--color-accent)]" : "bg-[var(--color-border)]"
-                      } relative`}
+                      className={`w-11 h-6 rounded-full transition-colors relative ${
+                        item.toggle ? "bg-[var(--accent)]" : "bg-[var(--border)]"
+                      }`}
                     >
                       <div
-                        className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${
-                          item.toggle ? "translate-x-5" : "translate-x-1"
+                        className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-transform shadow-[var(--shadow-xs)] ${
+                          item.toggle ? "translate-x-[22px]" : "translate-x-0.5"
                         }`}
                       />
                     </div>
                   ) : (
-                    <ChevronRight size={16} className="text-[var(--color-text-muted)]" />
+                    <ChevronRight size={16} className="text-[var(--text-muted)]" />
                   )}
                 </button>
               ))}
@@ -100,11 +101,11 @@ export default function SettingsPage() {
           </div>
         ))}
 
-        <div className="text-center pt-4">
-          <p className="text-[12px] text-[var(--color-text-muted)]">
+        <div className="text-center pt-6 pb-4">
+          <p className="text-[12px] text-[var(--text-muted)]">
             SmartDensity v1.0.0
           </p>
-          <p className="text-[11px] text-[var(--color-text-muted)] mt-0.5">
+          <p className="text-[11px] text-[var(--text-muted)] mt-0.5">
             Making every commute smarter
           </p>
         </div>

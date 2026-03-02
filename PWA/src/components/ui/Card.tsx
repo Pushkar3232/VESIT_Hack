@@ -7,19 +7,21 @@ interface CardProps {
   className?: string;
   onClick?: () => void;
   featured?: boolean;
+  hover?: boolean;
 }
 
-export default function Card({ children, className = "", onClick, featured = false }: CardProps) {
+export default function Card({ children, className = "", onClick, featured = false, hover = true }: CardProps) {
   return (
     <div
       onClick={onClick}
       className={`
-        rounded-[var(--radius-lg)] p-[var(--space-lg)] transition-all
+        rounded-[var(--radius-lg)] p-5 transition-all duration-250
         ${featured
-          ? "bg-[var(--color-feature-bg)] rounded-[var(--radius-xl)]"
-          : "bg-[var(--color-surface)] shadow-[var(--shadow-card)]"
+          ? "bg-gradient-to-br from-[#6DD5D5] to-[#4BBEBE] rounded-[var(--radius-xl)]"
+          : "bg-[var(--bg-surface)] shadow-[var(--shadow-sm)] border border-[var(--border)]"
         }
-        ${onClick ? "cursor-pointer active:scale-[0.98]" : ""}
+        ${hover ? "card-hover" : ""}
+        ${onClick ? "cursor-pointer" : ""}
         ${className}
       `}
     >

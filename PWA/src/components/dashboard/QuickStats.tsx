@@ -1,7 +1,7 @@
 "use client";
 
 import Card from "@/components/ui/Card";
-import { TrendingUp, TrendingDown, Users, MapPin } from "lucide-react";
+import { TrendingUp, TrendingDown, Users, MapPin, AlertTriangle } from "lucide-react";
 
 interface QuickStatsProps {
   totalPlaces: number;
@@ -12,30 +12,42 @@ interface QuickStatsProps {
 
 export default function QuickStats({ totalPlaces, avgCrowdScore, highAlerts, trend }: QuickStatsProps) {
   return (
-    <div className="grid grid-cols-3 gap-3">
-      <Card className="!p-3 text-center">
-        <MapPin size={16} className="text-[var(--color-accent)] mx-auto mb-1" />
-        <p className="text-[18px] font-bold text-[var(--color-text-primary)]">{totalPlaces}</p>
-        <p className="text-[11px] text-[var(--color-text-muted)]">Places</p>
+    <div className="stats-grid">
+      <Card hover={false} className="!p-4 text-center">
+        <div className="w-9 h-9 rounded-[var(--radius-sm)] bg-[var(--accent-light)] flex items-center justify-center mx-auto mb-2">
+          <MapPin size={18} className="text-[var(--accent-hover)]" />
+        </div>
+        <p style={{ fontFamily: "var(--font-display)" }} className="text-[22px] font-bold text-[var(--text-primary)]">
+          {totalPlaces}
+        </p>
+        <p className="text-[11px] text-[var(--text-muted)] mt-0.5">Places</p>
       </Card>
-      <Card className="!p-3 text-center">
-        <Users size={16} className="text-[var(--color-accent)] mx-auto mb-1" />
-        <div className="flex items-center justify-center gap-1">
-          <p className="text-[18px] font-bold text-[var(--color-text-primary)]">{avgCrowdScore}</p>
+
+      <Card hover={false} className="!p-4 text-center">
+        <div className="w-9 h-9 rounded-[var(--radius-sm)] bg-blue-50 flex items-center justify-center mx-auto mb-2">
+          <Users size={18} className="text-[var(--info)]" />
+        </div>
+        <div className="flex items-center justify-center gap-1.5">
+          <p style={{ fontFamily: "var(--font-display)" }} className="text-[22px] font-bold text-[var(--text-primary)]">
+            {avgCrowdScore}
+          </p>
           {trend === "up" ? (
-            <TrendingUp size={14} className="text-red-500" />
+            <TrendingUp size={14} className="text-[var(--error)]" />
           ) : (
-            <TrendingDown size={14} className="text-green-500" />
+            <TrendingDown size={14} className="text-[var(--success)]" />
           )}
         </div>
-        <p className="text-[11px] text-[var(--color-text-muted)]">Avg Score</p>
+        <p className="text-[11px] text-[var(--text-muted)] mt-0.5">Avg Score</p>
       </Card>
-      <Card className="!p-3 text-center">
-        <div className="w-4 h-4 rounded-full bg-red-500 mx-auto mb-1 flex items-center justify-center">
-          <span className="text-[8px] text-white font-bold">{highAlerts}</span>
+
+      <Card hover={false} className="!p-4 text-center">
+        <div className="w-9 h-9 rounded-[var(--radius-sm)] bg-red-50 flex items-center justify-center mx-auto mb-2">
+          <AlertTriangle size={18} className="text-[var(--error)]" />
         </div>
-        <p className="text-[18px] font-bold text-[var(--color-text-primary)]">{highAlerts}</p>
-        <p className="text-[11px] text-[var(--color-text-muted)]">Alerts</p>
+        <p style={{ fontFamily: "var(--font-display)" }} className="text-[22px] font-bold text-[var(--text-primary)]">
+          {highAlerts}
+        </p>
+        <p className="text-[11px] text-[var(--text-muted)] mt-0.5">Alerts</p>
       </Card>
     </div>
   );

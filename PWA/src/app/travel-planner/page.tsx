@@ -19,45 +19,57 @@ export default function TravelPlannerPage() {
     DEFAULT_PLACES.find((p) => p.id === id)?.name ?? id;
 
   return (
-    <div className="px-5 pb-6">
+    <div className="page-container pb-8 animate-enter">
       <Navbar variant="detail" title="Travel Planner" />
 
-      <div className="mt-4 space-y-6">
+      <div className="mt-2 space-y-6">
         <div>
-          <h2 className="text-[22px] font-bold text-[var(--color-text-primary)] mb-1">
+          <h2
+            style={{ fontFamily: "var(--font-display)" }}
+            className="text-[22px] lg:text-[28px] font-bold text-[var(--text-primary)] mb-1"
+          >
             Plan Your Travel
           </h2>
-          <p className="text-[13px] text-[var(--color-text-muted)]">
+          <p className="text-[13px] text-[var(--text-muted)] max-w-[500px]">
             Get the best departure time to avoid crowds on your route
           </p>
         </div>
 
-        <TravelForm onSubmit={handleSubmit} isLoading={isLoading} />
-
-        {isLoading && (
-          <div className="py-12">
-            <Loader size={32} />
-            <p className="text-center text-[13px] text-[var(--color-text-muted)] mt-3">
-              Analyzing travel windows...
-            </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div>
+            <TravelForm onSubmit={handleSubmit} isLoading={isLoading} />
           </div>
-        )}
 
-        {error && (
-          <div className="bg-red-50 text-red-700 rounded-[var(--radius-md)] p-4 text-[13px]">
-            {error}
+          <div>
+            {isLoading && (
+              <div className="py-16 text-center">
+                <Loader size={36} />
+                <p className="text-[13px] text-[var(--text-muted)] mt-4">
+                  Analyzing travel windows...
+                </p>
+              </div>
+            )}
+
+            {error && (
+              <div className="bg-red-50 text-[var(--error)] rounded-[var(--radius-md)] p-4 text-[13px] border border-red-200">
+                {error}
+              </div>
+            )}
+
+            {result && !isLoading && (
+              <div className="space-y-5 screen-enter">
+                <TravelResult result={result} />
+              </div>
+            )}
           </div>
-        )}
+        </div>
 
         {result && !isLoading && (
-          <div className="space-y-5 screen-enter">
-            <TravelResult result={result} />
-            <RouteTimeline
-              windows={result.allWindows}
-              source={getPlaceName(result.allWindows[0]?.departureTime ?? "")}
-              destination={getPlaceName(result.allWindows[0]?.arrivalTime ?? "")}
-            />
-          </div>
+          <RouteTimeline
+            windows={result.allWindows}
+            source={getPlaceName(result.allWindows[0]?.departureTime ?? "")}
+            destination={getPlaceName(result.allWindows[0]?.arrivalTime ?? "")}
+          />
         )}
       </div>
     </div>

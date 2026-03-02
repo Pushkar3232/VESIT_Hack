@@ -6,7 +6,7 @@ import type { CrowdLevel } from "@/types/prediction";
 interface BadgeProps {
   level?: CrowdLevel;
   children?: React.ReactNode;
-  variant?: "filled" | "outlined";
+  variant?: "filled" | "outlined" | "accent" | "dark";
   className?: string;
 }
 
@@ -18,22 +18,25 @@ const levelColors: Record<CrowdLevel, { bg: string; text: string }> = {
 };
 
 export default function Badge({ level, children, variant = "filled", className = "" }: BadgeProps) {
-  const colors = level ? levelColors[level] : { bg: "var(--color-tag-bg)", text: "var(--color-tag-text)" };
+  const colors = level
+    ? levelColors[level]
+    : { bg: "var(--chip-bg)", text: "var(--chip-text)" };
 
-  if (variant === "outlined") {
-    return (
-      <span
-        className={`inline-flex items-center rounded-full px-3 py-1 text-[11px] font-medium border border-[var(--color-border)] text-[var(--color-tag-text)] ${className}`}
-      >
-        {children ?? level}
-      </span>
-    );
-  }
+  const variantClasses: Record<string, string> = {
+    filled: "",
+    outlined: "!bg-transparent border border-[var(--border)] !text-[var(--chip-text)]",
+    accent: "!bg-[var(--accent-light)] !text-[var(--accent-hover)]",
+    dark: "!bg-[var(--selected-bg)] !text-[var(--selected-text)]",
+  };
 
   return (
     <span
-      className={`inline-flex items-center rounded-full px-3 py-1 text-[11px] font-semibold ${className}`}
-      style={{ backgroundColor: colors.bg, color: colors.text }}
+      className={`inline-flex items-center rounded-full px-3 py-1 text-[11px] font-semibold leading-none ${variantClasses[variant] || ""} ${className}`}
+      style={
+        variant === "filled"
+          ? { backgroundColor: colors.bg, color: colors.text }
+          : undefined
+      }
     >
       {children ?? level}
     </span>

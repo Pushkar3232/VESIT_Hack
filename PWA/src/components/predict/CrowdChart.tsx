@@ -2,6 +2,7 @@
 
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { getCrowdLevel, getCrowdColor } from "@/lib/utils/crowdLevel";
+import Card from "@/components/ui/Card";
 
 interface CrowdChartProps {
   data: { hour: string; score: number }[];
@@ -9,11 +10,14 @@ interface CrowdChartProps {
 
 export default function CrowdChart({ data }: CrowdChartProps) {
   return (
-    <div className="bg-white rounded-[var(--radius-lg)] p-4 shadow-[var(--shadow-card)]">
-      <h3 className="text-[15px] font-semibold text-[var(--color-text-primary)] mb-4">
+    <Card hover={false}>
+      <h3
+        style={{ fontFamily: "var(--font-display)" }}
+        className="text-[15px] font-semibold text-[var(--text-primary)] mb-5"
+      >
         Hourly Forecast
       </h3>
-      <ResponsiveContainer width="100%" height={200}>
+      <ResponsiveContainer width="100%" height={220}>
         <BarChart data={data}>
           <XAxis
             dataKey="hour"
@@ -31,9 +35,10 @@ export default function CrowdChart({ data }: CrowdChartProps) {
           <Tooltip
             contentStyle={{
               borderRadius: 12,
-              border: "none",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+              border: "1px solid var(--border)",
+              boxShadow: "var(--shadow-sm)",
               fontSize: 12,
+              fontFamily: "var(--font-body)",
             }}
             formatter={(value: number | undefined) => [`${value ?? 0}/100`, "Crowd Score"]}
           />
@@ -48,6 +53,6 @@ export default function CrowdChart({ data }: CrowdChartProps) {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-    </div>
+    </Card>
   );
 }
