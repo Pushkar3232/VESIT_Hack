@@ -3,6 +3,7 @@ import { Sora, DM_Sans } from "next/font/google";
 import "./globals.css";
 import BottomNav from "@/components/layout/BottomNav";
 import Sidebar from "@/components/layout/Sidebar";
+import CapacitorProvider from "@/components/layout/CapacitorProvider";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -50,13 +51,15 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
       <body className={`${sora.variable} ${dmSans.variable} antialiased`} suppressHydrationWarning>
-        <div className="app-layout">
-          <Sidebar />
-          <main className="app-main">
-            {children}
-          </main>
-          <BottomNav />
-        </div>
+        <CapacitorProvider>
+          <div className="app-layout">
+            <Sidebar />
+            <main className="app-main">
+              {children}
+            </main>
+            <BottomNav />
+          </div>
+        </CapacitorProvider>
       </body>
     </html>
   );

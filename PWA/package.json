@@ -6,9 +6,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cap": "capacitor",
+    "cap:add": "capacitor add",
+    "cap:open": "capacitor open",
+    "cap:sync": "capacitor sync",
+    "cap:build": "npm run build && capacitor copy",
+    "cap:prebuild": "npm run build && capacitor copy && capacitor build"
   },
   "dependencies": {
+    "@capacitor/android": "latest",
+    "@capacitor/app": "latest",
+    "@capacitor/core": "latest",
+    "@capacitor/geolocation": "latest",
+    "@capacitor/ios": "latest",
+    "@capacitor/network": "latest",
+    "@capacitor/camera": "latest",
+    "@capacitor/splash-screen": "latest",
+    "@capacitor/status-bar": "latest",
     "@prisma/client": "^7.4.2",
     "lucide-react": "^0.576.0",
     "next": "16.1.6",
@@ -21,6 +36,7 @@
     "zustand": "^5.0.11"
   },
   "devDependencies": {
+    "@capacitor/cli": "latest",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
