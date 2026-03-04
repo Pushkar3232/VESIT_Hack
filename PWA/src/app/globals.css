@@ -235,15 +235,36 @@ a,
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate-enter {
-  animation: fadeSlideUp 350ms var(--ease-out) forwards;
+  animation: fadeInUp 600ms var(--ease-out) forwards;
+}
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: floatUp 3s ease-in-out infinite;
 }
 
 .stagger-1 { animation-delay: 0ms; }
-.stagger-2 { animation-delay: 60ms; }
-.stagger-3 { animation-delay: 120ms; }
-.stagger-4 { animation-delay: 180ms; }
-.stagger-5 { animation-delay: 240ms; }
+.stagger-2 { animation-delay: 150ms; }
+.stagger-3 { animation-delay: 300ms; }
+.stagger-4 { animation-delay: 450ms; }
+.stagger-5 { animation-delay: 600ms; }
 
 .card-hover {
   transition: transform 250ms var(--ease-out), box-shadow 250ms var(--ease-out);
@@ -269,6 +290,28 @@ a,
   animation: glowPulse 4s ease-in-out infinite;
 }
 
+/* Smooth gradient animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+}
+
+/* Shimmer effect for buttons */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
 .skeleton {
   background: linear-gradient(90deg,
     var(--chip-bg) 25%,
@@ -290,24 +333,39 @@ a,
 
 .splash-bg {
   background:
-    radial-gradient(ellipse 80% 60% at 10% 80%, rgba(60,200,197,0.12), transparent),
-    radial-gradient(ellipse 60% 50% at 90% 20%, rgba(100,80,200,0.08), transparent),
+    radial-gradient(ellipse 150% 100% at 0% 50%, rgba(91, 200, 197, 0.25), transparent 50%),
+    radial-gradient(ellipse 120% 80% at 10% 80%, rgba(91, 200, 197, 0.15), transparent 40%),
+    radial-gradient(ellipse 100% 70% at 90% 20%, rgba(100, 80, 200, 0.1), transparent 40%),
+    radial-gradient(ellipse 90% 60% at 50% 100%, rgba(91, 200, 197, 0.08), transparent 40%),
     var(--bg-dark);
   position: relative;
+  min-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .splash-bg::after {
   content: '';
   position: absolute;
-  bottom: 20%;
+  bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
-  background: var(--accent-glow);
-  filter: blur(80px);
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  filter: blur(100px);
   pointer-events: none;
+  animation: floatUp 8s ease-in-out infinite;
+}
+
+/* Mobile optimizations for splash background */
+@media (max-width: 640px) {
+  .splash-bg::after {
+    width: 300px;
+    height: 300px;
+    bottom: 15%;
+  }
 }
 
 /* ============================================
